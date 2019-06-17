@@ -92,7 +92,7 @@ g
 ```
 
 ## Facet by gear
-
+#labeling_both is about factor and cat variable
 ```{r}
 g + facet_grid(gear ~ ., 
                labeller = label_both)
@@ -105,9 +105,9 @@ g + facet_grid(gear ~ ., labeller = label_both, scales = "free_y")
 ```
 
 ## Change panel heights with `space = "free_y"`
-
+# i deleted labeller = label_both, the graph didnt change so it is just unused argument
 ```{r}
-g + facet_grid(gear ~ ., labeller = label_both, scales = "free_y", 
+g + facet_grid(gear ~ ., scales = "free_y", 
                space = "free_y")
 ```
 
@@ -136,16 +136,17 @@ correct
 One column of categorical data = one faceting direction
 
 ```{r}
+install.packages("ggplot2movies")
 library(ggplot2movies)
 str(movies)
 ```
 
 ## Facet on `Action` column
-
+#my log scale
 ```{r}
 movies %>% filter(!is.na(budget)) %>% sample_n(1000) %>% 
-ggplot(aes(budget, length)) + geom_point() +
-  facet_wrap(~Action)
+ggplot(aes(log10(budget), length)) + geom_point() +
+  facet_wrap(~Action) 
 ```
 
 ## Transform data
@@ -247,6 +248,7 @@ ggplot(mymovies, aes(length)) + geom_histogram(fill = "cornflowerblue") +
 ## ggridges
 
 ```{r}
+install.packages("ggridges")
 library(ggridges)
 
 ggplot(mymovies, aes(x=length, y=fct_rev(decade))) +
@@ -393,7 +395,7 @@ sales %>% group_by(Date, `Product line`, `Retailer type`, `Order method type`) %
 
 ## Scatterplot matrices
 
-Can't create with faceting in `ggplot2`
+**Can't create with faceting in `ggplot2`**
 
 Options:
 
@@ -410,7 +412,7 @@ plot(iris)
 ```
 
 ## Scatterplot matrices
-
+#new!!!
 ```{r, fig.width = 5, fig.height = 5}
 lattice::splom(iris)
 ```
